@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Document</title>
+    <link rel="stylesheet" href="myStyle.css">
+</head>
+<body class="Mybody">
+   
+    <div id="main" class="mainDiv">
+        <h1>My Contact</h1>
+        <label for="Search"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg></label>
+        <input type="text" id="Search">
+        
+        <br><br>
+         <div class="divBtn">
+            <button onclick="showContact()" class="btn btn-info">show</button>
+            <button onclick="searchContact()" class="btn btn-secondary">Search</button>
+            <button onclick="ShowmyFav()" class="btn btn-dark">my Fav</button>
+            <button onclick="showFamily()" class="btn btn-warning">myFamliy</button>
+            </div> 
+        <div id="displayContact">
+        </div>
+    </div>
+</body>
+    <script>
+        let MyContact = [ //Contact LIST
+        {NAME: "GOKU", NUMBER: "05449944",IMG:"Goku-1.jpg", STATUS:"friend", FAV:false},
+        {NAME: "VEGETA", NUMBER: "993399",IMG:"vegeta.jpg", STATUS: "famliy", FAV:false},
+        {NAME: "TRUNKS", NUMBER: "664564",IMG:"trunks.jpg", STATUS: "famliy", FAV:false},
+        {NAME: "GOHAN", NUMBER: "44536",IMG:"gohan.jpg", STATUS: "friend", FAV:false}
+      ];
+      let MyFav =[];
+        function showContact(){
+            displayContact.innerHTML = '';
+            for (let i = 0; i <MyContact.length; i++) {
+             displayContact.innerHTML+= 
+                `<div class="w3-card-4 cardWrapper"style="width:20%; margin-top: 10px; margin-left: 10px;">
+                <img class="myImg" src="${MyContact[i].IMG}" alt="personIMG"style="width:100%">
+                     <div class="w3-container w3-center">
+                     <h4>${MyContact[i].NAME}</h4>
+                     <p>Number: ${MyContact[i].NUMBER}</p>
+                     <p>status: ${MyContact[i].STATUS}</p>
+                     <div class="d-grid gap-2">
+                        <button onclick="AddToFav(MyContact[${i}],id)" id="MyBtn${i}" class="btn btn-primary CardBtn">Add to  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg></button>
+                        </div>
+                     </div>
+                </div>`
+            }
+            CheckFav()
+        }
+        function searchContact(){
+            for (let i = 0; i <MyContact.length; i++){
+                if(MyContact[i].NAME == Search.value)
+                displayContact.innerHTML=
+                `<div class="w3-card-4 cardWrapper"style="width:20%; margin-top: 10px; margin-left: 10px;">
+                <img class="myImg" src="${MyContact[i].IMG}" alt="personIMG"style="width:100%">
+                     <div class="w3-container w3-center" >
+                     <h4>${MyContact[i].NAME}</h4>
+                     <p>Number: ${MyContact[i].NUMBER}</p>
+                     <p>status: ${MyContact[i].STATUS}</p>
+                     <div class="d-grid gap-2">
+                        <button onclick="AddToFav(MyContact[${i}],id)" id="MyBtn${i}" class="btn btn-primary CardBtn">Add to  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg></button>
+                     </div>
+                     </div>
+                </div>`
+            }
+            CheckFav()
+        } 
+        function AddToFav(obj,id){
+            for (let i = 0; i <MyFav.length; i++){
+            if( MyFav[i] == obj){
+                return
+            }
+           }
+            obj.FAV = true 
+            MyFav.push(obj); 
+            console.log(MyFav)
+            let thisBtn = document.getElementById(id);
+            console.log(thisBtn);
+            thisBtn.classList.add(`btn`);
+            thisBtn.classList.add(`btn-success`);
+            thisBtn.innerText=`added`
+        }
+
+        function ShowmyFav(){
+         console.log(MyFav);
+         displayContact.innerHTML=""
+         for (let i = 0; i <MyFav.length; i++){
+         displayContact.innerHTML+=
+        `<div class="w3-card-4" style="width:20%; margin-top: 10px; margin-left: 10px;">
+                <img src="${MyFav[i].IMG}" alt="personIMG"style="width:100%">
+                     <div class="w3-container w3-center" >
+                     <h4>${MyFav[i].NAME}</h4>
+                     <p>Number: ${MyFav[i].NUMBER}</p>
+                     <p>status: ${MyFav[i].STATUS}</p>
+                     <div class="d-grid gap-2">
+                        <button onclick="removeFav([${i}])" id="MyBtn${i}" class="btn btn-danger">remove  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg></button>
+                     </div>
+                     </div>
+                </div>`   
+        }
+    }   
+        function CheckFav() {
+            for (let i = 0; i < MyContact.length; i++){
+            if(MyContact[i].FAV ==true){
+                let thisBtn = document.getElementById(`MyBtn${i}`);
+                thisBtn.classList.add(`btn`);
+                thisBtn.classList.add(`btn-success`);
+                thisBtn.innerText=`added`;
+          } 
+          else if(MyContact[i].FAV ==false){
+           console.log(MyContact[i])
+                // thisBtn.innerText=`added`;
+          }
+         }
+        }
+        function removeFav(obj) {
+            MyFav[obj].FAV = false
+            MyFav.splice(obj,1)
+            console.log(MyFav);
+            console.log(MyContact);
+            ShowmyFav()
+        }
+        function showFamily() {
+            displayContact.innerHTML=""
+            for (let i = 0; i <MyContact.length; i++){
+                if(MyContact[i].STATUS == "famliy")
+                displayContact.innerHTML+=
+                `<div class="w3-card-4 cardWrapper"style="width:20%; margin-top: 10px; margin-left: 10px;">
+                <img class="myImg" src="${MyContact[i].IMG}" alt="personIMG"style="width:100%">
+                     <div class="w3-container w3-center" >
+                     <h4>${MyContact[i].NAME}</h4>
+                     <p>Number: ${MyContact[i].NUMBER}</p>
+                     <p>status: ${MyContact[i].STATUS}</p>
+                     <div class="d-grid gap-2">
+                        <button onclick="AddToFav(MyContact[${i}],id)" id="MyBtn${i}" class="btn btn-primary CardBtn">Add to  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg></button>
+                     </div>
+                     </div>
+                </div>`
+            }
+            CheckFav()
+        }
+    
+    </script>
+</html>

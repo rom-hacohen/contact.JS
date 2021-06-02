@@ -1,0 +1,56 @@
+.mainDiv{
+    position: relative;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: black;
+    text-align: center;
+    left: 150px;
+    top: 50%;
+    width: 1000px;
+    height:100%;
+   background-color: white;
+   margin-top: 20px;
+
+}
+#Father{
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-top: 0px;
+    
+}
+#displayContact{
+display: flex;
+justify-content: center;
+align-items: center;
+flex: 4;
+flex-direction: row;
+margin-bottom: 20px;
+}
+
+.cardWrapper{
+    width: 20%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.myImg{
+    height: 100PX;
+}
+
+.Mybody{
+    background-color: rgb(0, 140, 255);
+}
+
+.divBtn{
+    margin-bottom: 20px;
+}
+.CardBtn{
+    margin-bottom: 5px;
+}
+#Search {
+    width: 30%;
+    font-size: 20px;
+    padding: 10px 10px 10px 20px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+  }
